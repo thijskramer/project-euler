@@ -8,12 +8,12 @@ const getNextNumber = (index: number): number => {
   return getNextNumber(index - 1) + getNextNumber(index - 2);
 };
 
-const getFibonacciSequence = () => {
+const getFibonacciSequence = (limit: number) => {
   const sequence: number[] = [];
   let i = 0;
   while (true) {
     const number = getNextNumber(i);
-    if (number > 4_000_000) {
+    if (number > limit) {
       break;
     }
     sequence.push(number);
@@ -22,8 +22,10 @@ const getFibonacciSequence = () => {
   return sequence;
 };
 
-console.log(
-  getFibonacciSequence()
-    .filter((x) => x % 2 === 0)
-    .reduce((a, b) => a + b)
-);
+if (import.meta.main) {
+  console.log(
+    getFibonacciSequence(4_000_000)
+      .filter((x) => x % 2 === 0)
+      .reduce((a, b) => a + b)
+  );
+}
